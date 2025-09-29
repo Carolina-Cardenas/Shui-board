@@ -1,0 +1,107 @@
+{
+  "/Users/Carolina/Desktop/Folkuniversitet/Shui-board/backend/serverless.yml": {
+    "versionFramework": "4.19.1",
+    "servicePath": "/Users/Carolina/Desktop/Folkuniversitet/Shui-board/backend/serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "shui-board",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs20.x",
+        "region": "eu-north-1",
+        "environment": {
+          "TABLE_NAME": "ShuiMessages"
+        },
+        "iamRoleStatements": [
+          {
+            "Effect": "Allow",
+            "Action": [
+              "dynamodb:PutItem",
+              "dynamodb:GetItem",
+              "dynamodb:UpdateItem",
+              "dynamodb:Query",
+              "dynamodb:Scan"
+            ],
+            "Resource": [
+              "arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages",
+              "arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages/index/*"
+            ]
+          }
+        ]
+      },
+      "plugins": [
+        "serverless-offline"
+      ],
+      "functions": {
+        "createMessage": {
+          "handler": "functions/createMessage/index.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/messages",
+                "method": "post",
+                "cors": true
+              }
+            }
+          ]
+        },
+        "listMessages": {
+          "handler": "functions/listMessages/index.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/messages",
+                "method": "get",
+                "cors": true
+              }
+            }
+          ]
+        },
+        "updateMessage": {
+          "handler": "functions/updateMessage/index.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/messages/{id}",
+                "method": "put",
+                "cors": true
+              }
+            }
+          ]
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "eu-north-1",
+      "environment": {
+        "TABLE_NAME": "ShuiMessages"
+      },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:PutItem",
+            "dynamodb:GetItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:Query",
+            "dynamodb:Scan"
+          ],
+          "Resource": [
+            "arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages",
+            "arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages/index/*"
+          ]
+        }
+      ]
+    },
+    "serviceRawFile": "service: shui-board\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: eu-north-1\n  environment:\n    TABLE_NAME: ShuiMessages\n  iamRoleStatements:\n    - Effect: Allow\n      Action:\n        - dynamodb:PutItem\n        - dynamodb:GetItem\n        - dynamodb:UpdateItem\n        - dynamodb:Query\n        - dynamodb:Scan\n      Resource:\n        - arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages\n        - arn:aws:dynamodb:eu-north-1:<AWS_ACCOUNT_ID>:table/ShuiMessages/index/*\n\nplugins:\n  - serverless-offline\n\nfunctions:\n  createMessage:\n    handler: functions/createMessage/index.handler\n    events:\n      - httpApi:\n          path: /messages\n          method: post\n          cors: true\n\n  listMessages:\n    handler: functions/listMessages/index.handler\n    events:\n      - httpApi:\n          path: /messages\n          method: get\n          cors: true\n\n  updateMessage:\n    handler: functions/updateMessage/index.handler\n    events:\n      - httpApi:\n          path: /messages/{id}\n          method: put\n          cors: true\n",
+    "command": [],
+    "options": {},
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
+  }
+}
