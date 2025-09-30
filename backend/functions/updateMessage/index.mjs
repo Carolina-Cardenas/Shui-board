@@ -1,0 +1,42 @@
+import { GetItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { client } from "../../services/db.mjs";
+import { sendResponse } from "../../utils/responses.mjs";
+
+export const handler = async (event) => {
+  try {
+    const id = event.pathParameters && event.pathParameters.id;
+    if (!id) return sendResponse(400, { error: "Missing id" });
+
+    const body = JSON.parse(event.body || "{}");
+    const { text } = body;
+    if (!text) return sendResponse(400, { error: "text required" });
+
+    // Check exists
+    const get = await client.send(
+      new GetItemCommand({
+        TableName: process.env.TABLE_NAME || "ShuiMessages",
+        Key: { id: { S: id } },
+      })
+    );
+    if (!get.Item) return sendResponse(404, { error: "Message not found" });
+
+    const now = new Date().toISOString();
+    await client.send(
+      new UpdateItemCommand({
+        TableName: process.env.TABLE_NAME || "ShuiMessages",
+        Key: { id: { S: id } },
+        UpdateExpression: "SET #t = :text, updatedAt = :u",
+        ExpressionAttributeNames: { "#t": "text" },
+        ExpressionAttributeValues: {
+          ":text": { S: text },
+          ":u": { S: now },
+        },
+      })
+    );
+
+    return sendResponse(200, { id, text, updatedAt: now });
+  } catch (err) {
+    console.error("updateMessage error", err);
+    return sendResponse(500, { error: "Internal error" });
+  }
+};

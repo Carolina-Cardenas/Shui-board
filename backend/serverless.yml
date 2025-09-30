@@ -1,6 +1,4 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: carolinak
-# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
 app: cd
 service: shui-board
 
@@ -9,12 +7,14 @@ provider:
   runtime: nodejs20.x
   region: eu-north-1
   iam:
-    role:
-    esbuild:
-    minify: true
+    role: arn:aws:iam::298156079429:role/carolinas-shui-board-role
 
-    package:
+package:
   individually: true
+
+build:
+  esbuild:
+    minify: true
 
 functions:
   createMessage:
@@ -23,7 +23,6 @@ functions:
       - httpApi:
           path: /messages
           method: post
-          cors: true
 
   listMessages:
     handler: functions/listMessages/index.handler
@@ -31,7 +30,6 @@ functions:
       - httpApi:
           path: /messages
           method: get
-          cors: true
 
   updateMessage:
     handler: functions/updateMessage/index.handler
@@ -39,9 +37,8 @@ functions:
       - httpApi:
           path: /messages/{id}
           method: put
-          cors: true
 
-  resources:
+resources:
   Resources:
     MessagesTable:
       Type: AWS::DynamoDB::Table
