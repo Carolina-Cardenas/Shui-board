@@ -15,7 +15,7 @@ export const handler = async (event) => {
     const createdAt = new Date().toISOString();
 
     const Item = {
-      id: { S: id },
+      messageId: { S: id },
       username: { S: username },
       text: { S: text },
       createdAt: { S: createdAt },

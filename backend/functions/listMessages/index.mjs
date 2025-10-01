@@ -3,7 +3,7 @@ import { client } from "../../services/db.mjs";
 import { sendResponse } from "../../utils/responses.mjs";
 
 const mapItem = (it) => ({
-  id: it.id.S,
+  id: it.messageId.S,
   username: it.username.S,
   text: it.text.S,
   createdAt: it.createdAt.S,

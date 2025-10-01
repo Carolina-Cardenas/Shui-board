@@ -15,7 +15,7 @@ export const handler = async (event) => {
     const get = await client.send(
       new GetItemCommand({
         TableName: process.env.TABLE_NAME || "ShuiMessages",
-        Key: { id: { S: id } },
+        Key: { messageId: { S: id } },
       })
     );
     if (!get.Item) return sendResponse(404, { error: "Message not found" });
@@ -24,7 +24,7 @@ export const handler = async (event) => {
     await client.send(
       new UpdateItemCommand({
         TableName: process.env.TABLE_NAME || "ShuiMessages",
-        Key: { id: { S: id } },
+        Key: { messageId: { S: id } },
         UpdateExpression: "SET #t = :text, updatedAt = :u",
         ExpressionAttributeNames: { "#t": "text" },
         ExpressionAttributeValues: {
