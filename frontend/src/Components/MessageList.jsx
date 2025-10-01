@@ -1,6 +1,6 @@
 import React from "react";
 
-const MessageList = ({ messages }) => {
+const MessageList = ({ messages, onEdit }) => {
   if (messages.length === 0) {
     return <p>Du har inga meddelanden att visa.</p>;
   }
@@ -11,8 +11,10 @@ const MessageList = ({ messages }) => {
         <div key={msg.id} className="message">
           <p>{msg.text}</p>
           <small>
-            {msg.username} – {msg.createdAt}
+            {msg.username} – {new Date(msg.createdAt).toLocaleString()}
           </small>
+          <br />
+          <button onClick={() => onEdit(msg)}>Redigera</button>
         </div>
       ))}
     </div>
