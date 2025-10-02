@@ -2,67 +2,59 @@ import React, { useState, useEffect } from "react";
 import MessageForm from "./Components/MessageForm";
 import MessageList from "./Components/MessageList";
 import EditMessage from "./Components/EditMessage";
+import {
+  getMessages,
+  createMessage,
+  updateMessage as apiUpdateMessage,
+} from "./api";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [editingMessage, setEditingMessage] = useState(null);
 
-  // useEffect(() => {
-  //  getMessages().then(setMessages).catch(console.error);
-  //}, []);
-
-  // Temporal: datos mock (hasta conectar con backend)
+  //  Cargar mensajes desde el backend al iniciar
   useEffect(() => {
-    setMessages([
-      {
-        id: "1",
-        username: "Carolina",
-        text: "Hola a todos!",
-        createdAt: "2025-09-26T12:00:00Z",
-      },
-      {
-        id: "2",
-        username: "Alex",
-        text: "Estoy aprendiendo React",
-        createdAt: "2025-09-26T12:10:00Z",
-      },
-    ]);
+    getMessages()
+      .then((data) => {
+        setMessages(data); // El backend devuelve el array desde DynamoDB
+      })
+      .catch((err) => console.error("Error loading messages:", err));
   }, []);
 
-  // Crear mensaje nuevo
-  const addMessage = (newMsg) => {
-    const msg = {
-      id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      ...newMsg,
-    };
-    setMessages([msg, ...messages]);
+  //  Crear mensaje nuevo (con backend)
+  const addMessage = async (newMsg) => {
+    try {
+      const saved = await createMessage(newMsg); // Envia { username, text }
+      setMessages([saved, ...messages]); // Agregar al estado lo que devuelve Lambda
+    } catch (err) {
+      console.error("Error creating message:", err);
+    }
   };
 
-  // Editar mensaje
-  const updateMessage = (id, updatedText) => {
-    setMessages(
-      messages.map((msg) =>
-        msg.id === id ? { ...msg, text: updatedText } : msg
-      )
-    );
-    setEditingMessage(null);
+  // Editar mensaje existente (con backend)
+  const updateMessage = async (id, updatedText) => {
+    try {
+      const updated = await apiUpdateMessage(id, updatedText);
+      setMessages(messages.map((msg) => (msg.id === id ? updated : msg)));
+      setEditingMessage(null);
+    } catch (err) {
+      console.error("Error updating message:", err);
+    }
   };
 
   return (
     <div className="app">
-      <h1>Shui – Anslagstavla</h1>
       <MessageForm onSubmit={addMessage} />
 
-      {editingMessage && (
+      {editingMessage ? (
         <EditMessage
           message={editingMessage}
           onSave={updateMessage}
           onCancel={() => setEditingMessage(null)}
         />
+      ) : (
+        <MessageList messages={messages} onEdit={setEditingMessage} />
       )}
-
-      <MessageList messages={messages} onEdit={setEditingMessage} />
     </div>
   );
 }

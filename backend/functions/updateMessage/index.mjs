@@ -11,7 +11,6 @@ export const handler = async (event) => {
     const { text } = body;
     if (!text) return sendResponse(400, { error: "text required" });
 
-    // Check exists
     const get = await client.send(
       new GetItemCommand({
         TableName: process.env.TABLE_NAME || "ShuiMessages",
