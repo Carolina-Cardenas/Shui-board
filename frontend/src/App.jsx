@@ -21,7 +21,6 @@ function App() {
       .catch((err) => console.error("Error loading messages:", err));
   }, []);
 
-  //  Crear mensaje nuevo (con backend)
   const addMessage = async (newMsg) => {
     try {
       const saved = await createMessage(newMsg);
@@ -31,7 +30,6 @@ function App() {
     }
   };
 
-  // Editar mensaje existente (con backend)
   const updateMessage = async (id, updatedText) => {
     try {
       const updated = await apiUpdateMessage({ id, text: updatedText });

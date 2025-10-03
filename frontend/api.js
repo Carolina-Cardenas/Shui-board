@@ -1,13 +1,11 @@
 const API_URL = "https://qrt7gynw46.execute-api.eu-north-1.amazonaws.com";
 
-// Obtener todos los mensajes
 export async function getMessages() {
   const res = await fetch(`${API_URL}/messages`);
   if (!res.ok) throw new Error("Error getting messages");
   return res.json();
 }
 
-// POST - Crear mensaje
 export async function createMessage({ username, text }) {
   const res = await fetch(`${API_URL}/messages`, {
     method: "POST",
@@ -18,7 +16,6 @@ export async function createMessage({ username, text }) {
   return res.json();
 }
 
-// PUT - Actualizar mensaje por ID
 export async function updateMessage({ id, text }) {
   const res = await fetch(`${API_URL}/messages/${id}`, {
     method: "PUT",

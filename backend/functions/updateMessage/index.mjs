@@ -1,6 +1,5 @@
 import { GetItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { client } from "../../services/db.mjs";
-// import { sendResponse } from "../../utils/responses.mjs";
 
 export const handler = async (event) => {
   try {
