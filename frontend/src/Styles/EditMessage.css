@@ -1,4 +1,4 @@
-.edit-form {
+/* .edit-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -38,6 +38,48 @@
 .edit-form button[type="button"] {
     background-color: #dc3545;
     color: white;
+}
+
+.edit-form button[type="button"]:hover {
+    background-color: #c82333;
+} */
+
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--color-bg-card);
+    padding: 15px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    margin-top: 10px;
+}
+
+.edit-form textarea {
+    resize: vertical;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--color-text);
+    background: #fff;
+}
+
+.edit-form button[type="submit"] {
+    background-color: var(--color-success);
+    color: #fff;
+}
+
+.edit-form button[type="submit"]:hover {
+    background-color: #3c9c41;
+    /* un tono más oscuro */
+}
+
+.edit-form button[type="button"] {
+    background-color: var(--color-danger);
+    color: #fff;
 }
 
 .edit-form button[type="button"]:hover {

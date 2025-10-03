@@ -7,6 +7,7 @@ import {
   createMessage,
   updateMessage as apiUpdateMessage,
 } from "../api.js";
+import "./App.css";
 
 function App() {
   const [messages, setMessages] = useState([]);

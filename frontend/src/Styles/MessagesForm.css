@@ -1,4 +1,4 @@
-.message-form {
+/* .message-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -38,4 +38,44 @@
 
 .message-form button:hover {
     background-color: #005fa3;
+} */
+
+
+.message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: var(--color-bg-card);
+    padding: 15px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.message-form textarea,
+.message-form input {
+    resize: vertical;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 14px;
+    color: var(--color-text);
+    background: #fff;
+}
+
+.message-form button {
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.message-form button:hover {
+    background-color: var(--color-hover);
+    color: var(--color-primary);
 }
