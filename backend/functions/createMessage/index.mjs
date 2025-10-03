@@ -1,11 +1,20 @@
 import { PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { client } from "../../services/db.mjs";
-import { sendResponse } from "../../utils/responses.mjs";
+// import { sendResponse } from "../../utils/responses.mjs";
 import { nanoid } from "nanoid";
 
 export const handler = async (event) => {
   try {
-    const body = JSON.parse(event.body || "{}");
+    if (!event.body) {
+      console.error("No hay body en la petición");
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Request body missing" }),
+      };
+    }
+
+    const body = JSON.parse(event.body);
+
     const { username, text } = body;
     if (!username || !text) {
       return sendResponse(400, { error: "username and text required" });
@@ -34,3 +43,13 @@ export const handler = async (event) => {
     return sendResponse(500, { error: "Internal error" });
   }
 };
+
+const sendResponse = (statusCode, body) => ({
+  statusCode,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "http://localhost:5173",
+    "Access-Control-Allow-Credentials": "true",
+  },
+  body: JSON.stringify(body),
+});

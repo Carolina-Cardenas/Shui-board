@@ -1,4 +1,5 @@
 import React from "react";
+import "../Styles/MessageList.css";
 
 const MessageList = ({ messages, onEdit }) => {
   if (messages.length === 0) {

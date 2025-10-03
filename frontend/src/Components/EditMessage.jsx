@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../Styles/EditMessage.css";
 
 const EditMessage = ({ message, onSave, onCancel }) => {
   const [text, setText] = useState(message.text);
@@ -6,6 +7,7 @@ const EditMessage = ({ message, onSave, onCancel }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!text) return;
+
     onSave(message.id, text);
   };
 
@@ -16,6 +18,7 @@ const EditMessage = ({ message, onSave, onCancel }) => {
         onChange={(e) => setText(e.target.value)}
         placeholder="Ändra ditt meddelande..."
       />
+
       <button type="submit">Spara</button>
       <button type="button" onClick={onCancel}>
         Avbryt

@@ -8,7 +8,19 @@ provider:
   region: eu-north-1
   iam:
     role: arn:aws:iam::298156079429:role/carolinas-shui-board-role
-
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "http://localhost:5173"
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowCredentials: true
 package:
   individually: true
 

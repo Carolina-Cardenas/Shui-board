@@ -1,0 +1,45 @@
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff7e6;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #ffd580;
+    margin-top: 10px;
+}
+
+.edit-form textarea {
+    resize: vertical;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.edit-form button {
+    padding: 8px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.edit-form button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-form button[type="submit"]:hover {
+    background-color: #218838;
+}
+
+.edit-form button[type="button"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+.edit-form button[type="button"]:hover {
+    background-color: #c82333;
+}

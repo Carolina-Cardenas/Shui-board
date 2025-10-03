@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
-import MessageForm from "./Components/MessageForm";
+import MessageForm from "./Components/ MessageForm";
 import MessageList from "./Components/MessageList";
 import EditMessage from "./Components/EditMessage";
 import {
   getMessages,
   createMessage,
   updateMessage as apiUpdateMessage,
-} from "./api";
+} from "../api.js";
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [editingMessage, setEditingMessage] = useState(null);
 
-  //  Cargar mensajes desde el backend al iniciar
   useEffect(() => {
     getMessages()
       .then((data) => {
-        setMessages(data); // El backend devuelve el array desde DynamoDB
+        setMessages(data);
       })
       .catch((err) => console.error("Error loading messages:", err));
   }, []);
@@ -24,8 +23,8 @@ function App() {
   //  Crear mensaje nuevo (con backend)
   const addMessage = async (newMsg) => {
     try {
-      const saved = await createMessage(newMsg); // Envia { username, text }
-      setMessages([saved, ...messages]); // Agregar al estado lo que devuelve Lambda
+      const saved = await createMessage(newMsg);
+      setMessages([saved, ...messages]);
     } catch (err) {
       console.error("Error creating message:", err);
     }
@@ -34,7 +33,7 @@ function App() {
   // Editar mensaje existente (con backend)
   const updateMessage = async (id, updatedText) => {
     try {
-      const updated = await apiUpdateMessage(id, updatedText);
+      const updated = await apiUpdateMessage({ id, text: updatedText });
       setMessages(messages.map((msg) => (msg.id === id ? updated : msg)));
       setEditingMessage(null);
     } catch (err) {

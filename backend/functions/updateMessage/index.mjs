@@ -1,6 +1,6 @@
 import { GetItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
 import { client } from "../../services/db.mjs";
-import { sendResponse } from "../../utils/responses.mjs";
+// import { sendResponse } from "../../utils/responses.mjs";
 
 export const handler = async (event) => {
   try {
@@ -39,3 +39,12 @@ export const handler = async (event) => {
     return sendResponse(500, { error: "Internal error" });
   }
 };
+const sendResponse = (statusCode, body) => ({
+  statusCode,
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "http://localhost:5173",
+    "Access-Control-Allow-Credentials": "true",
+  },
+  body: JSON.stringify(body),
+});
