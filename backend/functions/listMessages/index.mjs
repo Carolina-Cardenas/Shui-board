@@ -1,58 +1,3 @@
-// import { ScanCommand as d, QueryCommand as p } from "@aws-sdk/client-dynamodb";
-// import { DynamoDBClient as u } from "@aws-sdk/client-dynamodb";
-// var o = new u({ region: "eu-north-1" });
-// var t = (e, r) => ({
-//   statusCode: e,
-//   headers: {
-//     "Content-Type": "application/json",
-//     "Access-Control-Allow-Origin": "*",
-//     "Access-Control-Allow-Credentials": !0,
-//   },
-//   body: JSON.stringify(r),
-// });
-// var i = (e) => ({
-//     id: e.messageId.S,
-//     username: e.username.S,
-//     text: e.text.S,
-//     createdAt: e.createdAt.S,
-//   }),
-//   w = async (e) => {
-//     try {
-//       let r = e.queryStringParameters || {},
-//         a = r.username,
-//         c = r.sort || "desc";
-//       if (a) {
-//         let m = {
-//             TableName: process.env.TABLE_NAME || "ShuiMessages",
-//             IndexName: "userIndex",
-//             KeyConditionExpression: "username = :u",
-//             ExpressionAttributeValues: { ":u": { S: a } },
-//             ScanIndexForward: c === "asc",
-//           },
-//           n = ((await o.send(new p(m))).Items || []).map(i);
-//         return t(200, n);
-//       } else {
-//         let s = (
-//           (
-//             await o.send(
-//               new d({ TableName: process.env.TABLE_NAME || "ShuiMessages" })
-//             )
-//           ).Items || []
-//         ).map(i);
-//         return (
-//           s.sort((n, l) => l.createdAt.localeCompare(n.createdAt)),
-//           c === "asc" && s.reverse(),
-//           t(200, s)
-//         );
-//       }
-//     } catch (r) {
-//       return (
-//         console.error("listMessages error", r),
-//         t(500, { error: "Internal error" })
-//       );
-//     }
-//   };
-// export { w as handler };
 import {
   ScanCommand as ScanCmd,
   QueryCommand as QueryCmd,
@@ -61,18 +6,17 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
 const client = new DynamoDBClient({ region: "eu-north-1" });
 
-// Función para enviar respuesta HTTP
 const sendResponse = (statusCode, body) => ({
   statusCode,
   headers: {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin":
+      "http://shui-board-frontend.s3-website.eu-north-1.amazonaws.com",
     "Access-Control-Allow-Credentials": true,
   },
   body: JSON.stringify(body),
 });
 
-// Transformar item de DynamoDB a objeto legible
 const formatItem = (item) => ({
   id: item.messageId.S,
   username: item.username.S,
