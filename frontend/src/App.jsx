@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div className="app">
-      <MessageForm onSubmit={addMessage} />
+      {!editingMessage && <MessageForm onSubmit={addMessage} />}
 
       {editingMessage ? (
         <EditMessage

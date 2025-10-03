@@ -25,7 +25,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-north-1-652ccfc2-b469",
-          "S3Key": "serverless/shui-board/dev/1759435672446-2025-10-02T20:07:52.446Z/shui-board-createMessage.zip"
+          "S3Key": "serverless/shui-board/dev/1759502864886-2025-10-03T14:47:44.886Z/shui-board-createMessage.zip"
         },
         "Handler": "functions/createMessage/index.handler",
         "Runtime": "nodejs20.x",
@@ -48,7 +48,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-north-1-652ccfc2-b469",
-          "S3Key": "serverless/shui-board/dev/1759435672446-2025-10-02T20:07:52.446Z/shui-board-listMessages.zip"
+          "S3Key": "serverless/shui-board/dev/1759502864886-2025-10-03T14:47:44.886Z/shui-board-listMessages.zip"
         },
         "Handler": "functions/listMessages/index.handler",
         "Runtime": "nodejs20.x",
@@ -71,7 +71,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-north-1-652ccfc2-b469",
-          "S3Key": "serverless/shui-board/dev/1759435672446-2025-10-02T20:07:52.446Z/shui-board-updateMessage.zip"
+          "S3Key": "serverless/shui-board/dev/1759502864886-2025-10-03T14:47:44.886Z/shui-board-updateMessage.zip"
         },
         "Handler": "functions/updateMessage/index.handler",
         "Runtime": "nodejs20.x",
@@ -89,34 +89,34 @@
         "UpdateMessageLogGroup"
       ]
     },
-    "ListMessagesLambdaVersionDqvAPQOx0WfuV7FhzLWX2tR9LMTlwqkxOgvmGS7o4": {
+    "ListMessagesLambdaVersion30t5wucVeg4xJid7pCDLawqv9RWMryvi8tAqVsJ9V0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ListMessagesLambdaFunction"
         },
-        "CodeSha256": "vDkfA2iHal2HgbgbajSwtAiypZg45qDw2deMVaOJyws="
+        "CodeSha256": "qSnmZYr150c5pRGLUrD1IRRXkgyaiAxYDqosu/fvpEU="
       }
     },
-    "CreateMessageLambdaVersionIu3rpIUvDGjyLI1vZohikcxUu8vFS667439Gy1LbE": {
+    "CreateMessageLambdaVersionNCWCpvWEzb83icyrOrHIY9mHCbzNU7SPx9B7etjZZo": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "CreateMessageLambdaFunction"
         },
-        "CodeSha256": "v8ADHMDBgAUzCue/94lUQIuXexVroOCPnlWCDlx8HMQ="
+        "CodeSha256": "qUip7E+ezKf6zezke/+YJtfMnqBAnMUSc7oeKsYJmbk="
       }
     },
-    "UpdateMessageLambdaVersionz9ZOtNbxCmoLlgeuB4jXr9iAfGnEQoInDIPiq6F4": {
+    "UpdateMessageLambdaVersionq1a5HJD1V235QcAoaMk7LBLIiwYYKUE7doP0oIic": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "UpdateMessageLambdaFunction"
         },
-        "CodeSha256": "M+32EWHF4aSVHYG+IBd3W4BNgBbJ6TS+DmIUevZ2dDs="
+        "CodeSha256": "yByetSGzAnkX5YvEaGPerEtgztcYvdy6o1SGtb9DC/Q="
       }
     },
     "HttpApi": {
@@ -436,7 +436,7 @@
     "ListMessagesLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ListMessagesLambdaVersionDqvAPQOx0WfuV7FhzLWX2tR9LMTlwqkxOgvmGS7o4"
+        "Ref": "ListMessagesLambdaVersion30t5wucVeg4xJid7pCDLawqv9RWMryvi8tAqVsJ9V0"
       },
       "Export": {
         "Name": "sls-shui-board-dev-ListMessagesLambdaFunctionQualifiedArn"
@@ -445,7 +445,7 @@
     "CreateMessageLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "CreateMessageLambdaVersionIu3rpIUvDGjyLI1vZohikcxUu8vFS667439Gy1LbE"
+        "Ref": "CreateMessageLambdaVersionNCWCpvWEzb83icyrOrHIY9mHCbzNU7SPx9B7etjZZo"
       },
       "Export": {
         "Name": "sls-shui-board-dev-CreateMessageLambdaFunctionQualifiedArn"
@@ -454,7 +454,7 @@
     "UpdateMessageLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "UpdateMessageLambdaVersionz9ZOtNbxCmoLlgeuB4jXr9iAfGnEQoInDIPiq6F4"
+        "Ref": "UpdateMessageLambdaVersionq1a5HJD1V235QcAoaMk7LBLIiwYYKUE7doP0oIic"
       },
       "Export": {
         "Name": "sls-shui-board-dev-UpdateMessageLambdaFunctionQualifiedArn"

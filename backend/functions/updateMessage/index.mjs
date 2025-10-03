@@ -33,7 +33,13 @@ export const handler = async (event) => {
       })
     );
 
-    return sendResponse(200, { id, text, updatedAt: now });
+    return sendResponse(200, {
+      id,
+      text,
+      username: get.Item.username.S,
+      createdAt: get.Item.createdAt.S,
+      updatedAt: now,
+    });
   } catch (err) {
     console.error("updateMessage error", err);
     return sendResponse(500, { error: "Internal error" });
